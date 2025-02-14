@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Font Size Adjuster</title>
+    <style>
+        #adjustableParagraph {
+            font-size: 16px;
+        }
+        .arrow-button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h2>Font Size Adjuster</h2>
+    <p id="adjustableParagraph">Sample text paragraph. Press the increase and decrease buttons to change the font size.</p>
+    <!--23BPS1184-->
+    <button class="arrow-button" onclick="increaseFontSize()">&#9650;</button> 
+    <button class="arrow-button" onclick="decreaseFontSize()">&#9660;</button> 
+    <script>
+        function increaseFontSize() {
+            const paragraph = document.getElementById('adjustableParagraph');
+            const currentFontSize = window.getComputedStyle(paragraph, null).getPropertyValue('font-size');
+            const newFontSize = parseFloat(currentFontSize) + 2;
+            paragraph.style.fontSize = newFontSize + 'px';
+        }
+        
+        function decreaseFontSize() {
+            const paragraph = document.getElementById('adjustableParagraph');
+            const currentFontSize = window.getComputedStyle(paragraph, null).getPropertyValue('font-size');
+            const newFontSize = parseFloat(currentFontSize) - 2;
+            paragraph.style.fontSize = newFontSize + 'px';
+        }
+        /*23BPS1184*/
+    </script>
+</body>
+</html>
