@@ -1,1 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Table Generator</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Dynamic Table Generator</h2>
+    <label for="rows">Rows:</label>
+    <input type="number" id="rows" min="1" required>
+    <label for="columns">Columns:</label>
+    <input type="number" id="columns" min="1" required>
+    <button onclick="generateTable()">Generate Table</button>
+    <div id="tableContainer"></div>
 
+    <script>
+        function generateTable() {
+            const rows = document.getElementById('rows').value;
+            const columns = document.getElementById('columns').value;
+            const tableContainer = document.getElementById('tableContainer');
+            tableContainer.innerHTML = ''; // Clear previous table
+
+            const table = document.createElement('table');
+
+            for (let i = 0; i < rows; i++) {
+                const tr = document.createElement('tr');
+                for (let j = 0; j < columns; j++) {
+                    const td = document.createElement('td');
+                    td.textContent = `Row ${i + 1} Col ${j + 1}`;
+                    tr.appendChild(td);
+                }
+                const deleteRowBtn = document.createElement('button');
+                deleteRowBtn.textContent = 'Delete Row';
+                deleteRowBtn.onclick = () => tr.remove();
+                tr.appendChild(deleteRowBtn);
+                table.appendChild(tr);
+            }
+
+            const deleteColumnBtn = document.createElement('button');
+            deleteColumnBtn.textContent = 'Delete Last Column';
+            deleteColumnBtn.onclick = () => {
+                const rows = table.rows;
+                for (let i = 0; i < rows.length; i++) {
+                    if (rows[i].cells.length > 0) {
+                        rows[i].deleteCell(-2); // Delete second last cell (last cell is delete button)
+                    }
+                }
+            };
+            tableContainer.appendChild(table);
+            tableContainer.appendChild(deleteColumnBtn);
+        }
+    </script>
+</body>
+</html>
